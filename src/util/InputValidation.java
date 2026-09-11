@@ -2,8 +2,6 @@ package util;
 
 import java.util.Scanner;
 
-public class InputValidation {
-
 /* 4. VALIDATION - for each non-"DONE" input line, split into 4 tokens
  *    (firstName, lastName, PID, grade) and validate:
  *
@@ -34,6 +32,9 @@ public class InputValidation {
  *
  * 5. On success, create a Student object and store it in a
  *    collection (e.g. ArrayList<Student>).*/
+
+public class InputValidation {
+
 
     public static String[] inputValidationStudentLine(Scanner meow){
 
