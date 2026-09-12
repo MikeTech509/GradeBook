@@ -19,12 +19,19 @@ public class GradeBook {
 	}
 
 	/**
-	 * Adds a new student to the gradebook.
+	 * Adds a new student to the gradebook, unless a student with the
+	 * same PID already exists.
 	 *
 	 * @param student the student to add
+	 * @return true if the student was added, false if a student with
+	 *         the same PID already exists
 	 */
-	public void addStudent(Student student){
+	public boolean addStudent(Student student){
+		if (findByPid(student.getPid()) != null) {
+			return false;
+		}
 		listOfStudents.add(student);
+		return true;
 	}
 
 	/**

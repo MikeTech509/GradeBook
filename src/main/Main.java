@@ -36,7 +36,10 @@ public class Main {
 
             int pid = Integer.parseInt(tokens[2]);
             int score = Integer.parseInt(tokens[3]);
-            gradebook.addStudent(new Student(tokens[0], tokens[1], pid, new Grade(score)));
+
+            if (!gradebook.addStudent(new Student(tokens[0], tokens[1], pid, new Grade(score)))) {
+                System.out.println("A student with PID " + pid + " already exists. Please try again:");
+            }
 
             System.out.println("Please enter the information of the next student using the same format.");
             System.out.println("If there is no more students, please enter the keyword \"DONE\".");
