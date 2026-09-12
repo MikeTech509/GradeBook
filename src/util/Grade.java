@@ -1,7 +1,9 @@
-/* public class Grade: keeps a single grade in the form of both score
-(from 0 to 100) and letter grade (A, A-, . . . , F).*/
-
-/*
+/**
+ * Represents a single grade, consisting of a numeric score (0-100)
+ * and its corresponding letter grade (A, A-, ..., F). The letter
+ * grade is automatically recalculated whenever the score changes,
+ * so the two values can never fall out of sync.
+ *
  * Grading Scale
  * ----------------------------------
  * Letter Grade | Range (%)
@@ -17,35 +19,56 @@
  * F            | 0  - 59.99
  * ----------------------------------
  */
-
 package util;
 
 public class Grade {
 
-    private int score;             // private field to hold score
-    private String letterGrade;    // private field to hold letterGrade
+    private int score;
+    private String letterGrade;
 
+    /**
+     * Creates a Grade with the given score and immediately computes
+     * its corresponding letter grade.
+     *
+     * @param score the numeric score, expected to be between 0 and 100
+     */
     public Grade(int score){
         this.score = score;
         updatedLetterGrade();
-    } // constructor
+    }
 
+    /**
+     * Updates the score and recalculates the letter grade to match.
+     *
+     * @param newScore the new numeric score to assign
+     */
     public void setScore(int newScore){
         this.score = newScore;
         updatedLetterGrade();
-    } // End of setScore();
+    }
 
-
+    /**
+     * @return the current numeric score
+     */
     public int getScore() {
-
         return score;
-    } // End of GetScore();
+    }
 
+    /**
+     * @return the letter grade corresponding to the current score
+     */
     public String getLetterGrade(){
         return letterGrade;
+    }
 
-    } // end of getLetterGrade();
-
+    /**
+     * Recalculates the letter grade based on the current score,
+     * using the standard grading scale. Called automatically by
+     * the constructor and by setScore() so the letter grade is
+     * always kept in sync with the score.
+     *
+     * @return the newly computed letter grade
+     */
     public String updatedLetterGrade() {
 
         if (score >= 95) letterGrade = "A";
@@ -59,5 +82,5 @@ public class Grade {
         else letterGrade = "F";
 
         return letterGrade;
-    } // End of UpdatedLetterGrade();
+    }
 }
