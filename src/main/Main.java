@@ -1,16 +1,26 @@
-/* contains the main method which does the followings: first it gets
-user’s input data from System.in verifies the data to make sure there is no problem
-with the input data. Then, it asks for user’s commands and gets them via System.in.
-Finally, it processes each command, and outputs the results to System.out */
-
-
-
+/**
+ * Entry point for the Gradebook program. Handles two phases:
+ *
+ * Phase 1 - Input Handling: reads and validates student records
+ * (firstName lastName PID grade) from the console until the user
+ * enters "DONE".
+ *
+ * Phase 2 - Command Handling: repeatedly reads commands from the
+ * console (e.g. "min score", "letter 1234567", "change 1234567 85")
+ * and prints the corresponding result, until the user enters "quit".
+ */
 package main;
 
 import util.*;
 import java.util.Scanner;
 
 public class Main {
+
+    /**
+     * Runs the gradebook program.
+     *
+     * @param args not used
+     */
     public static void main(String[] args) {
         Scanner meow = new Scanner(System.in);
         GradeBook gradebook = new GradeBook();
@@ -22,7 +32,7 @@ public class Main {
 
         while (true) {
             String[] tokens = InputValidation.inputValidationStudentLine(meow);
-            if (tokens == null) break; // "DONE" was entered
+            if (tokens == null) break;
 
             int pid = Integer.parseInt(tokens[2]);
             int score = Integer.parseInt(tokens[3]);
@@ -86,6 +96,9 @@ public class Main {
                     gradebook.printTabLetters();
                     break;
 
+                // "letter <PID>", "name <PID>", "change <PID> <newGrade>", and "quit"
+                // all take a variable argument after the command word, so they can't
+                // be matched as fixed case labels and are handled here instead.
                 default:
                     if (command[0].equals("letter")) {
                         Student oneStudent = gradebook.findByPid(Integer.parseInt(command[1]));
@@ -103,5 +116,5 @@ public class Main {
             }
         }
         meow.close();
-    } // End of main()
-} // End of Main class
+    }
+}
